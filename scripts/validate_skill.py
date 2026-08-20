@@ -59,7 +59,11 @@ if not os.path.exists(ref_dir):
     print("❌ Error: references/ directory not found!")
     sys.exit(1)
 
-link_matches = re.findall(r"\[.*?\]\(file:\/\/\/.*?\/references\/(.*?\.md)\)", content)
+link_matches = re.findall(r"\[.*?\]\((?:file:\/\/\/.*?\/)?references\/(.*?\.md)\)", content)
+if not link_matches:
+    print("❌ Error: No reference links found in SKILL.md!")
+    sys.exit(1)
+
 broken_links = 0
 for ref_file_name in link_matches:
     ref_file_path = os.path.join(ref_dir, ref_file_name)

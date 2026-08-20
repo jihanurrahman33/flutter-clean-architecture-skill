@@ -25,11 +25,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Validate SKILL.md Structure
-        run: node scripts/validate_skill.js
+      - name: Validate SKILL.md Structure (Node & Python)
+        run: |
+          node scripts/validate_skill.js
+          python3 scripts/validate_skill.py
 
-      - name: Check Markdown Reference Links
-        run: node scripts/check_references.js
+      - name: Check Markdown Reference Links (Node & Python)
+        run: |
+          node scripts/check_references.js
+          python3 scripts/check_references.py
 
-      - name: Validate Clean Architecture in Reference Example
-        run: node scripts/validate_architecture.js examples/posts/lib
+      - name: Validate Clean Architecture in Reference Example (Node & Python)
+        run: |
+          node scripts/validate_architecture.js examples/posts/lib
+          python3 scripts/validate_architecture.py examples/posts/lib

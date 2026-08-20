@@ -20,14 +20,19 @@ def check_markdown_file(file_path):
     matches = re.findall(r"\[.*?\]\((?!http|https|#|mailto:)(.*?)\)", content)
 
     for target in matches:
-        clean_target = target.split("#")[0]
+        clean_target = target.split("#")[0].split("?")[0].strip()
         if not clean_target:
             continue
 
+        # Decode URL-encoded characters
+        clean_target = clean_target.replace("%20", " ")
+
         if clean_target.startswith("file:///"):
-            resolved = clean_target[8:]
-            if sys.platform == "win32" and re.match(r"^[a-zA-Z]:\/", resolved):
-                resolved = resolved.replace("/", "\\")
+            stripped = clean_target[8:]
+            if sys.platform == "win32" and re.match(r"^[a-zA-Z]:\/", stripped):
+                resolved = stripped.replace("/", "\\")
+            else:
+                resolved = os.path.normpath(os.path.join(file_dir, stripped))
         else:
             resolved = os.path.normpath(os.path.join(file_dir, clean_target))
 

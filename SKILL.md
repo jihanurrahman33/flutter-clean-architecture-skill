@@ -85,10 +85,11 @@ Before modifying or creating any code in a Flutter project, the AI MUST:
 ## 6. Procedural Workflows
 
 ### 6.1 New Feature Workflow
-Follow the 12-step implementation pipeline detailed in [feature-development.md](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/feature-development.md):
+Follow the 12-step implementation pipeline detailed in [feature-development.md](references/feature-development.md):
 1. Requirements analysis $\rightarrow$ 2. Project inspection $\rightarrow$ 3. Domain entities & repo contract $\rightarrow$ 4. Use cases $\rightarrow$ 5. Data models & data sources $\rightarrow$ 6. Repository implementation $\rightarrow$ 7. Presentation BLoC/state $\rightarrow$ 8. Screens & widgets $\rightarrow$ 9. Feature DI (`di.dart`) $\rightarrow$ 10. Route registration $\rightarrow$ 11. Unit/BLoC tests $\rightarrow$ 12. Format & Static analysis.
 
 ### 6.2 Modification & Bugfix Workflow
+Follow the surgical modification guidelines detailed in [modification-workflow.md](references/modification-workflow.md):
 1. Locate target layer (UI $\rightarrow$ Presentation, Logic $\rightarrow$ Domain, Network/Data $\rightarrow$ Data).
 2. Apply minimal, surgical diffs.
 3. Preserve existing state data during loading/error transitions.
@@ -96,11 +97,11 @@ Follow the 12-step implementation pipeline detailed in [feature-development.md](
 5. Run `flutter analyze` to guarantee zero regressions.
 
 ### 6.3 Refactoring & Migration Workflow
-Follow the Strangler Fig pattern in [refactoring.md](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/refactoring.md):
+Follow the Strangler Fig pattern detailed in [refactoring.md](references/refactoring.md):
 - Extract Domain $\rightarrow$ Extract Data $\rightarrow$ Extract Use Cases $\rightarrow$ Wire Presentation $\rightarrow$ Deprecate legacy paths incrementally.
 
 ### 6.4 Architecture Review Workflow
-Evaluate code against the rubric in [architecture-review.md](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/architecture-review.md):
+Evaluate code against the rubric detailed in [architecture-review.md](references/architecture-review.md):
 - Classify issues as **CRITICAL**, **HIGH**, **MEDIUM**, or **LOW**.
 - Provide file path, violated invariant, and actionable remediation steps.
 
@@ -110,25 +111,25 @@ Evaluate code against the rubric in [architecture-review.md](file:///c:/Users/ji
 
 For detailed deep-dives, code templates, and exhaustive explanations, refer to:
 
-- **[Architecture Invariants & Principles](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/architecture.md)**
-- **[Feature-First Project Layout](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/project-structure.md)**
-- **[Domain Layer Specifications](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/domain-layer.md)**
-- **[Data Layer & Serialization](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/data-layer.md)**
-- **[Presentation Layer & UI States](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/presentation-layer.md)**
-- **[Dependency Injection Patterns](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/dependency-injection.md)**
-- **[Error Handling & Either Monad](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/error-handling.md)**
-- **[State Management Guidelines](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/state-management.md)**
-- **[Navigation & Routing Architecture](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/navigation.md)**
-- **[Testing Strategy & Test Matrix](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/testing.md)**
-- **[API Integration & Remote Data](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/api-integration.md)**
-- **[Feature Development Pipeline](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/feature-development.md)**
-- **[Feature Modification Workflow](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/modification-workflow.md)**
-- **[Refactoring & Migration Runbook](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/refactoring.md)**
-- **[Architecture Review & Audit Protocol](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/architecture-review.md)**
-- **[Forbidden Anti-Patterns Catalog](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/anti-patterns.md)**
-- **[AI Agent Behavioral Guardrails](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/ai-behavior.md)**
-- **[Coding Style & SOLID Principles](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/coding-rules.md)**
-- **[Data Flow & Transformations](file:///c:/Users/jihan/Documents/flutter-clean-architecture/references/data-flow.md)**
+- **[Architecture Invariants & Principles](references/architecture.md)**: Core layers, dependency boundaries, and non-negotiable invariants.
+- **[Feature-First Project Layout](references/project-structure.md)**: Standard directory structures and component placement decision matrix.
+- **[Domain Layer Specifications](references/domain-layer.md)**: Entities, Value Objects, Domain Repositories, and Use Cases (`UseCase<Type, Params>`).
+- **[Data Layer & Serialization](references/data-layer.md)**: Models, DTOs, Data Sources, and Repository Implementations.
+- **[Presentation Layer & UI States](references/presentation-layer.md)**: Screens vs Widgets, UI State Preservation, and Event/State lifecycles.
+- **[Dependency Injection Patterns](references/dependency-injection.md)**: Feature-level DI (`di.dart`), Service Locator (`get_it`), and Riverpod.
+- **[Error Handling & Failure Hierarchy](references/error-handling.md)**: `Either<Failure, T>` monad, typed `Failure` hierarchy, and exception conversion.
+- **[State Management Guidelines](references/state-management.md)**: Framework-agnostic rules (BLoC, Cubit, Riverpod, Provider).
+- **[Navigation & Routing Architecture](references/navigation.md)**: Centralized routing, `go_router` patterns, and decoupled navigation.
+- **[Testing Strategy & Test Matrix](references/testing.md)**: Layer-by-layer test matrix with `mocktail` and `bloc_test` suites.
+- **[API Integration & Remote Data](references/api-integration.md)**: Centralized `ApiClient`, interceptors, pagination, and remote data sources.
+- **[Feature Development Pipeline](references/feature-development.md)**: 12-step deterministic new feature implementation pipeline.
+- **[Feature Modification Workflow](references/modification-workflow.md)**: Surgical modification & bugfix runbook.
+- **[Refactoring & Migration Runbook](references/refactoring.md)**: Strangler Fig migration runbook for legacy Flutter codebases.
+- **[Architecture Review & Audit Protocol](references/architecture-review.md)**: Audit checklist, scoring matrix, and PR review reporting template.
+- **[Forbidden Anti-Patterns Catalog](references/anti-patterns.md)**: 15+ anti-patterns with Bad vs Good code, rationales, and fixes.
+- **[AI Agent Behavioral Guardrails](references/ai-behavior.md)**: AI cognitive principles, search-before-create, and source of truth hierarchy.
+- **[Coding Style & SOLID Principles](references/coding-rules.md)**: Immutability, const constructors, null safety, and SOLID principles.
+- **[Data Flow & Transformations](references/data-flow.md)**: Complete request & response flow diagrams.
 
 ---
 

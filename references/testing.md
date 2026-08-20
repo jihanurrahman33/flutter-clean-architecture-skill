@@ -67,7 +67,7 @@ import 'package:app/features/post/domain/usecases/get_posts_usecase.dart';
 
 class MockPostRepository extends Mock implements PostRepository {}
 
-void main Western() {
+void main() {
   late GetPostsUseCase useCase;
   late MockPostRepository mockRepository;
 

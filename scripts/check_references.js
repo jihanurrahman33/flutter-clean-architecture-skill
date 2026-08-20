@@ -21,22 +21,28 @@ function checkMarkdownFile(filePath) {
   let match;
 
   while ((match = linkRegex.exec(content)) !== null) {
-    let target = match[1].split('#')[0]; // strip anchor
-    if (!target) continue;
+    let rawTarget = match[1].split('#')[0].split('?')[0].trim();
+    if (!rawTarget) continue;
 
-    // Handle file:/// absolute paths
-    if (target.startsWith('file:///')) {
-      target = target.replace(/^file:\/\/\//, '');
-      // Handle windows paths e.g. c:/...
-      if (process.platform === 'win32' && /^[a-zA-Z]:\//.test(target)) {
-        target = target.replace(/\//g, '\\');
+    // Decode URI encoding (e.g. %20 -> space)
+    try {
+      rawTarget = decodeURIComponent(rawTarget);
+    } catch (_) {}
+
+    let resolved;
+    if (rawTarget.startsWith('file:///')) {
+      let stripped = rawTarget.replace(/^file:\/\/\//, '');
+      if (process.platform === 'win32' && /^[a-zA-Z]:\//.test(stripped)) {
+        resolved = stripped.replace(/\//g, '\\');
+      } else {
+        resolved = path.resolve(fileDir, stripped);
       }
     } else {
-      target = path.resolve(fileDir, target);
+      resolved = path.resolve(fileDir, rawTarget);
     }
 
     checkedCount++;
-    if (!fs.existsSync(target)) {
+    if (!fs.existsSync(resolved)) {
       console.error(`❌ Broken link in ${path.relative(rootDir, filePath)}: -> ${match[1]}`);
       brokenCount++;
     }

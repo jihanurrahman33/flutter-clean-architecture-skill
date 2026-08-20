@@ -100,20 +100,28 @@ flutter-clean-architecture-skill/
 │   └── package.json                  # NPM script runner
 │
 ├── tests/                            # Skill evaluation benchmark suite
-│   ├── prompts/                      # Input evaluation scenarios
-│   │   ├── new-feature.md
-│   │   ├── api-integration.md
-│   │   ├── refactoring.md
-│   │   ├── architecture-review.md
-│   │   ├── dependency-injection.md
-│   │   └── testing.md
-│   └── expected/                     # Expected architectural outcomes
+│   ├── prompts/                      # 10+ evaluation prompt scenarios
+│   │   ├── new-feature.md            # Scenario 1: New API feature
+│   │   ├── api-integration.md        # Scenario 2: REST API integration & mapping
+│   │   ├── auth-flow.md              # Scenario 3: JWT session & storage
+│   │   ├── pagination.md             # Scenario 4: Infinite scrolling pagination
+│   │   ├── local-caching.md          # Scenario 5: Offline-first caching fallback
+│   │   ├── refactoring.md            # Scenario 6: Legacy StatefulWidget migration
+│   │   ├── architecture-review.md    # Scenario 7: Pull request architecture audit
+│   │   ├── violation-fix.md          # Scenario 8: Layer boundary leak remediation
+│   │   ├── testing.md                # Scenario 9: Layer-by-layer unit/bloc tests
+│   │   └── modification.md           # Scenario 10: Surgical feature modification
+│   └── expected/                     # Expected architectural assertions
 │       ├── new-feature.md
 │       ├── api-integration.md
+│       ├── auth-flow.md
+│       ├── pagination.md
+│       ├── local-caching.md
 │       ├── refactoring.md
 │       ├── architecture-review.md
-│       ├── dependency-injection.md
-│       └── testing.md
+│       ├── violation-fix.md
+│       ├── testing.md
+│       └── modification.md
 │
 └── .github/                          # Open-source CI & GitHub configuration
     ├── workflows/

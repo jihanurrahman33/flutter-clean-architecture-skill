@@ -69,17 +69,24 @@ if (!fs.existsSync(refDir)) {
   process.exit(1);
 }
 
-const linkRegex = /\[.*?\]\(file:\/\/\/.*?\/references\/(.*?\.md)\)/g;
+const linkRegex = /\[.*?\]\((?:file:\/\/\/.*?\/)?references\/(.*?\.md)\)/g;
 let linkMatch;
 let brokenLinks = 0;
+let checkedLinks = 0;
 
 while ((linkMatch = linkRegex.exec(content)) !== null) {
+  checkedLinks++;
   const refFileName = linkMatch[1];
   const refFilePath = path.join(refDir, refFileName);
   if (!fs.existsSync(refFilePath)) {
     console.error(`❌ Error: Broken reference link in SKILL.md: references/${refFileName}`);
     brokenLinks++;
   }
+}
+
+if (checkedLinks === 0) {
+  console.error('❌ Error: No reference links found in SKILL.md!');
+  process.exit(1);
 }
 
 if (brokenLinks > 0) {
