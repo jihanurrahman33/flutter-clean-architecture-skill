@@ -1,0 +1,21 @@
+{
+  "name": "flutter-clean-architecture-scripts",
+  "version": "1.0.0",
+  "description": "Validation tooling for Flutter Clean Architecture skill and codebases",
+  "main": "validate_architecture.js",
+  "scripts": {
+    "validate:skill": "node validate_skill.js",
+    "validate:references": "node check_references.js",
+    "validate:architecture": "node validate_architecture.js ../examples/posts/lib",
+    "test": "node validate_skill.js && node check_references.js && node validate_architecture.js ../examples/posts/lib"
+  },
+  "keywords": [
+    "flutter",
+    "clean-architecture",
+    "ai-skill",
+    "linter",
+    "validator"
+  ],
+  "author": "Antigravity AI Agent",
+  "license": "MIT"
+}

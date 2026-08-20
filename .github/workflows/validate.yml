@@ -1,0 +1,35 @@
+name: Validate Skill & Architecture
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate Skill, Links & Architecture
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate SKILL.md Structure
+        run: node scripts/validate_skill.js
+
+      - name: Check Markdown Reference Links
+        run: node scripts/check_references.js
+
+      - name: Validate Clean Architecture in Reference Example
+        run: node scripts/validate_architecture.js examples/posts/lib

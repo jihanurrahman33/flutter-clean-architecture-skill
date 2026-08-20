@@ -1,0 +1,35 @@
+name: Release Skill Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Build & Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Skill Distribution Archive
+        run: |
+          tar -czf flutter-clean-architecture-skill.tar.gz \
+            SKILL.md \
+            README.md \
+            LICENSE \
+            CHANGELOG.md \
+            references/ \
+            examples/ \
+            scripts/ \
+            tests/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: flutter-clean-architecture-skill.tar.gz
+          draft: false
+          prerelease: false
+          generate_release_notes: true
